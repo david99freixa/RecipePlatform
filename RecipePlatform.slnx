@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="RecipePlatform.Data/RecipePlatform.Data.csproj" Id="8603d282-d96c-44ab-91fb-37c8177efd97" />
   <Project Path="RecipePlatform.Domain/RecipePlatform.Domain.csproj" />
+  <Project Path="RecipePlatform.WebAPI/RecipePlatform.WebAPI.csproj" Id="360bf31b-5805-4b9e-a1f7-ac260c364100" />
 </Solution>

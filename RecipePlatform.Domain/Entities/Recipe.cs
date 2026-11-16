@@ -37,7 +37,7 @@ public class Recipe
 
     public List<RecipeRevision> Revisions { get; set; } = new();
 
-    public DateTime? ReviewesAt { get; set; }
+    public DateTime? ReviewedAt { get; set; }
 
     public string? RejectionReason { get; set; }
 }

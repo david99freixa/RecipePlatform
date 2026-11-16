@@ -13,6 +13,6 @@ public class RecipeRevisionConfiguration : IEntityTypeConfiguration<RecipeRevisi
         builder.HasOne(revision => revision.Recipe)
             .WithMany(recipe => recipe.Revisions)
             .HasForeignKey(revision => revision.RecipeId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }

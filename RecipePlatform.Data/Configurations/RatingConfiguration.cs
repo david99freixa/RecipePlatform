@@ -13,14 +13,14 @@ public class RatingConfiguration : IEntityTypeConfiguration<Rating>
         builder.HasOne(rating => rating.User)
             .WithMany(user => user.Ratings)
             .HasForeignKey(rating => rating.UserId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.NoAction);
 
         // Relação entre Rating e Recipe
 
         builder.HasOne(rating => rating.Recipe)
             .WithMany(recipe => recipe.Ratings)
             .HasForeignKey(rating => rating.RecipeId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.NoAction);
 
         // Impedir avaliações duplicadas
 

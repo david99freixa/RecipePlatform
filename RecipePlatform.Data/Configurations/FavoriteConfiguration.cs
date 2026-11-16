@@ -13,14 +13,14 @@ public class FavoriteConfiguration : IEntityTypeConfiguration<Favorite>
         builder.HasOne(favorite => favorite.User)
             .WithMany(user => user.Favorites)
             .HasForeignKey(favorite => favorite.UserId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.NoAction);
 
         // Relação entre Favorite e Recipe
 
         builder.HasOne(favorite => favorite.Recipe)
             .WithMany(recipe => recipe.Favorites)
             .HasForeignKey(favorite => favorite.RecipeId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.NoAction);
 
         // Impedir favoritos duplicados
 
