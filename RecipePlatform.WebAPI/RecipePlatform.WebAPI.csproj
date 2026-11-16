@@ -16,6 +16,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RecipePlatform.Data\RecipePlatform.Data.csproj" />
+    <ProjectReference Include="..\RecipePlatform.IoC\RecipePlatform.IoC.csproj" />
+    <ProjectReference Include="..\RecipePlatform.Services\RecipePlatform.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,21 +1,23 @@
 using Microsoft.EntityFrameworkCore;
 using RecipePlatform.Data;
+using RecipePlatform.Data.Repositories;
+using RecipePlatform.Domain.Interfaces;
+using RecipePlatform.IoC;
+using RecipePlatform.Services;
+using RecipePlatform.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration
-    .GetConnectionString("RecipePlatform")
-    ?? throw new InvalidOperationException("Connection string 'RecipePlatform' not found.");
+// Registar repositories, services e a UnitOfWork com o IoC container
+builder.Services.AddRecipePlatformServices(builder.Configuration);
 
-// Add services to the container.
-builder.Services.AddDbContext<ApplicationContext>(options =>
-    options.UseSqlServer(connectionString));
-
+// Registar os controllers
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
