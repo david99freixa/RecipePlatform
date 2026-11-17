@@ -80,4 +80,20 @@ public class RecipeRepository : IRecipeRepository
         _context.Recipes.Remove(recipe);
         return recipe;
     }
+    public List<Recipe> GetPending()
+    {
+        // Consulta receitas que aguardam aprovação
+        return _context.Recipes
+            .Where(recipe => recipe.Status == Status.Pending)
+            .Include(recipe => recipe.Author)
+            .Include(recipe => recipe.Categories)
+            .Include(recipe => recipe.RecipeIngredients)
+                .ThenInclude(item => item.Ingredient)
+            .Include(recipe => recipe.Steps)
+            .AsSplitQuery()
+            .AsNoTracking()
+            .OrderBy(recipe => recipe.Id)
+            .ToList();
+    }
+
 }

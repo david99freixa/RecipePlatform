@@ -9,4 +9,7 @@ public interface IRecipeRepository : IRepository<Recipe>
     List<Recipe> GetByAuthorId(int authorId);
 
     Recipe? GetApprovedByIdWithDetails(int id);
+
+    // Consulta receitas pendentes para análise do administrador
+    List<Recipe> GetPending();
 }

@@ -6,6 +6,8 @@ using RecipePlatform.Data.Repositories;
 using RecipePlatform.Domain.Interfaces;
 using RecipePlatform.Services;
 using RecipePlatform.Services.Interfaces;
+using Microsoft.AspNetCore.Identity;
+using RecipePlatform.Domain.Entities;
 
 namespace RecipePlatform.IoC;
 
@@ -29,6 +31,13 @@ public static class DependecyInjection // static porque não queremos instanciar
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IUserService, UserService>();
+
+        services.AddScoped<IAuthService, AuthService>(); // Regista o serviço responsável pelo registo e login
+
+        services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>(); // Permite criar e verificar hashes de passwords
+
+        services.AddScoped<ICommentService, CommentService>(); // Regista as regras de negócio dos comentários
+
 
         return services;
     }

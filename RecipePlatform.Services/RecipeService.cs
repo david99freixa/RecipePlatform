@@ -137,5 +137,60 @@ public class RecipeService : IRecipeService
 
         return recipe.Id;
     }
+
+
+    public List<Recipe> GetPending()
+    {
+        // Consulta as receitas que aguardam aprovação
+        return _recipeRepository.GetPending();
+    }
+
+    public bool ApproveRecipe(int id)
+    {
+        // Procura a receita pelo ID
+        var recipe = _recipeRepository.GetById(id);
+
+        // Apenas permite aprovar receitas pendentes
+        if (recipe == null || recipe.Status != Status.Pending)
+        {
+            return false;
+        }
+
+        // Atualiza o estado e a data de aprovação
+        recipe.Status = Status.Approved;
+        recipe.ReviewedAt = DateTime.UtcNow;
+        recipe.RejectionReason = null;
+
+        // Guarda as alterações no SQL Server
+        _unitOfWork.SaveChanges();
+
+        return true;
+    }
+
+    public bool RejectRecipe(int id, string? reason)
+    {
+        // Procura a receita pelo ID
+        var recipe = _recipeRepository.GetById(id);
+
+        // Apenas permite rejeitar receitas pendentes
+        if (recipe == null || recipe.Status != Status.Pending)
+        {
+            return false;
+        }
+
+        // Regista a rejeição e o motivo, caso exista
+        recipe.Status = Status.Rejected;
+        recipe.ReviewedAt = DateTime.UtcNow;
+
+        recipe.RejectionReason = string.IsNullOrWhiteSpace(reason)
+            ? null
+            : reason.Trim();
+
+        // Guarda as alterações no SQL Server
+        _unitOfWork.SaveChanges();
+
+        return true;
+    }
+
 }
 

@@ -10,4 +10,16 @@ public interface IRecipeService
     Recipe? GetApprovedByIdWithDetails(int id);
 
     int SubmitRecipe(SubmitRecipeDto dto, int authorId);
+
+    // Devolve as receitas que aguardam aprovação
+    List<Recipe> GetPending();
+
+    // Aprova uma receita pendente
+    bool ApproveRecipe(int id);
+
+    // Rejeita uma receita pendente
+    bool RejectRecipe(int id, string? reason);
+
 }
+
+
